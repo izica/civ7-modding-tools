@@ -37,10 +37,8 @@ class ProgressionTreeNodeBuilder extends BaseBuilder_1.BaseBuilder {
                 });
             }),
         });
-        this._localizations.fill({
-            englishText: this.localizations.map(item => {
-                return new localizations_1.ProgressionTreeNodeLocalization(Object.assign({ prefix: this.progressionTreeNode.progressionTreeNodeType }, item));
-            }).flatMap(item => item.getNodes())
+        this.localizations.forEach(item => {
+            this._localizations.push(new localizations_1.ProgressionTreeNodeLocalization(Object.assign({ prefix: this.progressionTreeNode.progressionTreeNodeType }, item)).getNodes());
         });
         return this;
     }
@@ -59,10 +57,7 @@ class ProgressionTreeNodeBuilder extends BaseBuilder_1.BaseBuilder {
                         }));
                     }
                 });
-                this._localizations.englishText = [
-                    ...this._localizations.englishText,
-                    ...item._localizations.englishText
-                ];
+                this._localizations.push(item._localizations);
             }
             if (item instanceof ConstructibleBuilder_1.ConstructibleBuilder) {
                 item._always.constructibles.forEach((constructible) => {

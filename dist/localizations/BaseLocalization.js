@@ -40,7 +40,7 @@ const utils_1 = require("../utils");
 const nodes_1 = require("../nodes");
 class BaseLocalization {
     constructor(payload = {}) {
-        this.locale = constants_1.LANGUAGE.en_US;
+        this.language = constants_1.LANGUAGE.en_US;
         this.prefix = null;
         this.fill(payload);
     }
@@ -53,27 +53,43 @@ class BaseLocalization {
         return this;
     }
     getNodes() {
-        const keys = lodash.without(Object.keys(this), 'prefix', 'locale');
-        if (this.locale === constants_1.LANGUAGE.en_US) {
-            return keys.flatMap((key) => {
-                if (!this[key]) {
-                    return null;
-                }
-                if (Array.isArray(this[key])) {
-                    return this[key].map((value, index) => {
-                        return new nodes_1.EnglishTextNode({
-                            tag: (0, utils_1.locale)(this.prefix || '', `${key}_${index + 1}`),
-                            text: value
-                        });
-                    });
-                }
-                return new nodes_1.EnglishTextNode({
+        const keys = lodash.without(Object.keys(this), 'prefix', 'language');
+        const result = {
+            englishText: [],
+            localizedText: []
+        };
+        keys.forEach(key => {
+            if (!this[key]) {
+                return;
+            }
+            if (Array.isArray(this[key])) {
+                this[key].forEach((value, index) => {
+                    const data = {
+                        tag: (0, utils_1.locale)(this.prefix || '', `${key}_${index + 1}`),
+                        text: value
+                    };
+                    if (this.language === constants_1.LANGUAGE.en_US) {
+                        result.englishText.push(new nodes_1.EnglishTextNode(data));
+                    }
+                    else {
+                        result.localizedText.push(new nodes_1.LocalizedTextNode(Object.assign({ language: this.language }, data)));
+                    }
+                });
+            }
+            else {
+                const data = {
                     tag: (0, utils_1.locale)(this.prefix || '', key),
                     text: this[key]
-                });
-            }).filter(item => !!item);
-        }
-        return [];
+                };
+                if (this.language === constants_1.LANGUAGE.en_US) {
+                    result.englishText.push(new nodes_1.EnglishTextNode(data));
+                }
+                else {
+                    result.localizedText.push(new nodes_1.LocalizedTextNode(Object.assign({ language: this.language }, data)));
+                }
+            }
+        });
+        return result;
     }
 }
 exports.BaseLocalization = BaseLocalization;

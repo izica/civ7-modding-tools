@@ -105,10 +105,8 @@ class UnitBuilder extends BaseBuilder_1.BaseBuilder {
         this._icons.fill({
             iconDefinitions: [new nodes_1.IconDefinitionNode(Object.assign({ id: this.unit.unitType }, this.icon))]
         });
-        this._localizations.fill({
-            englishText: this.localizations.map(item => {
-                return new localizations_1.UnitLocalization(Object.assign({ prefix: this.unit.unitType }, item));
-            }).flatMap(item => item.getNodes())
+        this.localizations.forEach(item => {
+            this._localizations.push(new localizations_1.UnitLocalization(Object.assign({ prefix: this.unit.unitType }, item)).getNodes());
         });
         return this;
     }

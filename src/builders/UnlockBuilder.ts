@@ -104,7 +104,7 @@ export class UnlockBuilder extends BaseBuilder<TUnlockRewardBuilder> {
                 );
 
                 this.requirementSet.localizations?.forEach(localization => {
-                    this._localizations.englishText.concat(
+                    this._localizations.push(
                         new UnlockRequirementLocalization({
                             prefix: requirementSet.requirementSetId,
                             ...localization
@@ -179,7 +179,7 @@ export class UnlockBuilder extends BaseBuilder<TUnlockRewardBuilder> {
             );
 
             this.civilizationUnlock.localizations?.forEach(localization => {
-                this._localizations.englishText.concat(
+                this._localizations.push(
                     new UnlockRequirementLocalization({
                         prefix: `UNLOCK_PLAY_AS_${trim(civilizationUnlock.civilizationType)}_${trim(civilizationUnlock.type)}`,
                         ...localization
@@ -247,7 +247,7 @@ export class UnlockBuilder extends BaseBuilder<TUnlockRewardBuilder> {
             );
 
             this.leaderUnlock.localizations?.forEach(localization => {
-                this._localizations.englishText.concat(
+                this._localizations.push(
                     new UnlockRequirementLocalization({
                         prefix: `UNLOCK_PLAY_AS_${trim(leaderUnlock.leaderType)}_${trim(leaderUnlock.type)}`,
                         ...localization

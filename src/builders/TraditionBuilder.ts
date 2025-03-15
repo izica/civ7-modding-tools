@@ -2,7 +2,7 @@ import * as lodash from "lodash"
 
 import { TClassProperties, TPartialRequired } from "../types";
 import { DatabaseNode, GameEffectNode, TraditionModifierNode, TraditionNode, TTraditionNode, TypeNode } from "../nodes";
-import { TraditionLocalization, TTraditionLocalization } from "../localizations";
+import { ProgressionTreeNodeLocalization, TraditionLocalization, TTraditionLocalization } from "../localizations";
 import { XmlFile } from "../files";
 import { ACTION_GROUP_ACTION, KIND } from "../constants";
 import { locale, trim } from "../utils";
@@ -40,13 +40,13 @@ export class TraditionBuilder extends BaseBuilder<TTraditionBuilder> {
             })]
         });
 
-        this._localizations.fill({
-            englishText: this.localizations.map(item => {
-                return new TraditionLocalization({
+        this.localizations.forEach(item => {
+            this._localizations.push(
+                new TraditionLocalization({
                     prefix: this.tradition.traditionType,
                     ...item
-                });
-            }).flatMap(item => item.getNodes())
+                }).getNodes()
+            );
         });
 
         return this;

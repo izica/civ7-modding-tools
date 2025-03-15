@@ -6,11 +6,11 @@ import {
     CivilizationItemNode,
     CivilizationNode,
     CivilizationTagNode,
-    CivilizationTraitNode, CivilizationUnlockNode,
+    CivilizationTraitNode,
     DatabaseNode,
     GameCivilizationNodeSlice,
     GameEffectNode,
-    IconDefinitionNode, LeaderCivilizationBiasNode, LeaderUnlockNode,
+    IconDefinitionNode,
     LegacyCivilizationNode,
     LegacyCivilizationTraitNode,
     ModifierNode,
@@ -37,7 +37,7 @@ import {
     VisArtCivilizationBuildingCultureNode,
     VisArtCivilizationUnitCultureNode
 } from "../nodes";
-import { ACTION_GROUP_ACTION, AGE, BUILDING_CULTURES, CIVILIZATION_DOMAIN, EFFECT, KIND, REQUIREMENT, TAG_TRAIT, TRAIT, UNIT_CULTURE } from "../constants";
+import { ACTION_GROUP_ACTION, AGE, BUILDING_CULTURES, EFFECT, KIND, REQUIREMENT, TAG_TRAIT, TRAIT, UNIT_CULTURE } from "../constants";
 import { locale, trim } from "../utils";
 import { XmlFile } from "../files";
 import { CivilizationLocalization, TCivilizationLocalization } from "../localizations";
@@ -254,13 +254,13 @@ export class CivilizationBuilder extends BaseBuilder<TCivilizationBuilder> {
             })]
         });
 
-        this._localizations.fill({
-            englishText: this.localizations.map(item => {
-                return new CivilizationLocalization({
+        this.localizations.forEach(item => {
+            this._localizations.push(
+                new CivilizationLocalization({
                     prefix: this.civilization.civilizationType,
                     ...item
-                });
-            }).flatMap(item => item.getNodes())
+                }).getNodes()
+            );
         });
 
         const cityNamesCount = lodash.maxBy(this.localizations, loc => loc.cityNames?.length || 0)?.cityNames?.length || 0;

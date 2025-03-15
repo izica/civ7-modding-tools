@@ -8,7 +8,7 @@ import { XmlFile } from "../files";
 
 import { ProgressionTreeNodeBuilder } from "./ProgressionTreeNodeBuilder";
 import { BaseBuilder } from "./BaseBuilder";
-import { ProgressionTreeLocalization, TProgressionTreeLocalization } from "../localizations";
+import { ModifierLocalization, ProgressionTreeLocalization, TProgressionTreeLocalization } from "../localizations";
 
 type TProgressionTreeBuilder = TClassProperties<ProgressionTreeBuilder>
 
@@ -45,13 +45,13 @@ export class ProgressionTreeBuilder extends BaseBuilder<TProgressionTreeBuilder>
             })
         });
 
-        this._localizations.fill({
-            englishText: this.localizations.map(item => {
-                return new ProgressionTreeLocalization({
+        this.localizations.forEach(item => {
+            this._localizations.push(
+                new ProgressionTreeLocalization({
                     prefix: this.progressionTree.progressionTreeType,
                     ...item
-                });
-            }).flatMap(item => item.getNodes())
+                }).getNodes()
+            );
         });
 
         return this;

@@ -46,8 +46,6 @@ const ConstructibleBuilder_1 = require("./ConstructibleBuilder");
 const ProgressionTreeBuilder_1 = require("./ProgressionTreeBuilder");
 const ModifierBuilder_1 = require("./ModifierBuilder");
 const UniqueQuarterBuilder_1 = require("./UniqueQuarterBuilder");
-const CivilizationUnlockBuilder_1 = require("./CivilizationUnlockBuilder");
-const LeaderUnlockBuilder_1 = require("./LeaderUnlockBuilder");
 class CivilizationBuilder extends BaseBuilder_1.BaseBuilder {
     constructor(payload = {}) {
         super();
@@ -168,10 +166,8 @@ class CivilizationBuilder extends BaseBuilder_1.BaseBuilder {
         this._icons.fill({
             iconDefinitions: [new nodes_1.IconDefinitionNode(Object.assign({ id: this.civilization.civilizationType }, this.icon))]
         });
-        this._localizations.fill({
-            englishText: this.localizations.map(item => {
-                return new localizations_1.CivilizationLocalization(Object.assign({ prefix: this.civilization.civilizationType }, item));
-            }).flatMap(item => item.getNodes())
+        this.localizations.forEach(item => {
+            this._localizations.push(new localizations_1.CivilizationLocalization(Object.assign({ prefix: this.civilization.civilizationType }, item)).getNodes());
         });
         const cityNamesCount = ((_b = (_a = lodash.maxBy(this.localizations, loc => { var _a; return ((_a = loc.cityNames) === null || _a === void 0 ? void 0 : _a.length) || 0; })) === null || _a === void 0 ? void 0 : _a.cityNames) === null || _b === void 0 ? void 0 : _b.length) || 0;
         for (let i = 1; i <= cityNamesCount; i++) {
@@ -247,23 +243,6 @@ class CivilizationBuilder extends BaseBuilder_1.BaseBuilder {
                         hidden: true
                     }));
                 });
-            }
-            if (item instanceof CivilizationUnlockBuilder_1.CivilizationUnlockBuilder) {
-                this._shell.civilizationUnlocks.push(new nodes_1.CivilizationUnlockNode({
-                    ageDomain: 'StandardAges',
-                    civilizationDomain: constants_1.CIVILIZATION_DOMAIN.from(item.from.ageType),
-                    civilizationType: item.from.civilizationType,
-                    type: item.to.civilizationType,
-                    ageType: item.to.ageType,
-                    kind: constants_1.KIND.CIVILIZATION,
-                    name: (0, utils_1.locale)(item.to.civilizationType, 'NAME'),
-                    description: (0, utils_1.locale)(item.to.civilizationType, 'DESCRIPTION'),
-                    icon: item.to.civilizationType
-                }));
-            }
-            if (item instanceof LeaderUnlockBuilder_1.LeaderUnlockBuilder) {
-                this._shell.leaderUnlocks.push(new nodes_1.LeaderUnlockNode(Object.assign({ leaderDomain: 'StandardLeaders', ageDomain: 'StandardAges', kind: constants_1.KIND.CIVILIZATION, name: (0, utils_1.locale)(item.leaderUnlock.type, 'name'), description: (0, utils_1.locale)(item.leaderUnlock.type, 'description'), icon: item.leaderUnlock.type }, item.leaderUnlock)));
-                this._shell.leaderCivilizationBias.push(new nodes_1.LeaderCivilizationBiasNode(Object.assign(Object.assign({ civilizationDomain: constants_1.CIVILIZATION_DOMAIN.from(item.leaderUnlock.ageType), civilizationType: item.leaderUnlock.type, reasonType: (0, utils_1.locale)(`PLAY_AS_${(0, utils_1.trim)(item.leaderUnlock.leaderType)}_${(0, utils_1.trim)(item.leaderUnlock.type)}`, 'TOOLTIP') }, item.leaderUnlock), item.leaderCivilizationBias)));
             }
         });
         return this;

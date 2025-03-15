@@ -1,9 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.trim = void 0;
-const trim = (string) => {
+const trim = (string, prefix) => {
     if (!string) {
         return '';
+    }
+    if (prefix && string.startsWith(prefix)) {
+        return string.substring(prefix.length);
     }
     const prefixes = [
         'CIVILIZATION_',
@@ -17,6 +20,7 @@ const trim = (string) => {
         'TREE_',
         'TRADITION_',
         'CONSTRUCTIBLE_',
+        'UNLOCK_',
     ];
     for (const prefix of prefixes) {
         if (string.startsWith(prefix)) {

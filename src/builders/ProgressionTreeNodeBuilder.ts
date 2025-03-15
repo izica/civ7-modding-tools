@@ -7,7 +7,7 @@ import { locale } from "../utils";
 import { ModifierBuilder } from "./ModifierBuilder";
 import { ConstructibleBuilder } from "./ConstructibleBuilder";
 import { UnitBuilder } from "./UnitBuilder";
-import { ProgressionTreeNodeLocalization, TProgressionTreeNodeLocalization } from "../localizations";
+import { ProgressionTreeLocalization, ProgressionTreeNodeLocalization, TProgressionTreeNodeLocalization } from "../localizations";
 import { TraditionBuilder } from "./TraditionBuilder";
 
 type TProgressionTreeNodeBuilder = TClassProperties<ProgressionTreeNodeBuilder>
@@ -46,13 +46,13 @@ export class ProgressionTreeNodeBuilder extends BaseBuilder<TProgressionTreeNode
             }),
         });
 
-        this._localizations.fill({
-            englishText: this.localizations.map(item => {
-                return new ProgressionTreeNodeLocalization({
+        this.localizations.forEach(item => {
+            this._localizations.push(
+                new ProgressionTreeNodeLocalization({
                     prefix: this.progressionTreeNode.progressionTreeNodeType,
                     ...item
-                });
-            }).flatMap(item => item.getNodes())
+                }).getNodes()
+            );
         });
 
         return this;
@@ -75,10 +75,7 @@ export class ProgressionTreeNodeBuilder extends BaseBuilder<TProgressionTreeNode
                     }
                 });
 
-                this._localizations.englishText = [
-                    ...this._localizations.englishText,
-                    ...item._localizations.englishText
-                ];
+                this._localizations.push(item._localizations);
             }
 
             if (item instanceof ConstructibleBuilder) {

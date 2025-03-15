@@ -2,7 +2,7 @@ import * as lodash from "lodash"
 
 import { TClassProperties, TPartialRequired } from "../types";
 import { DatabaseNode, GameEffectNode, GameModifierNode, IconDefinitionNode, TIconDefinitionNode, TypeNode, UniqueQuarterModifierNode, UniqueQuarterNode } from "../nodes";
-import { TUniqueQuarterLocalization, UniqueQuarterLocalization } from "../localizations";
+import { TraditionLocalization, TUniqueQuarterLocalization, UniqueQuarterLocalization } from "../localizations";
 import { XmlFile } from "../files";
 import { ACTION_GROUP_ACTION, KIND } from "../constants";
 import { locale } from "../utils";
@@ -53,13 +53,13 @@ export class UniqueQuarterBuilder extends BaseBuilder<TUniqueQuarterBuilder> {
             })]
         })
 
-        this._localizations.fill({
-            englishText: this.localizations.map(item => {
-                return new UniqueQuarterLocalization({
+        this.localizations.forEach(item => {
+            this._localizations.push(
+                new UniqueQuarterLocalization({
                     prefix: this.uniqueQuarter.uniqueQuarterType,
                     ...item
-                });
-            }).flatMap(item => item.getNodes())
+                }).getNodes()
+            );
         });
 
         return this;

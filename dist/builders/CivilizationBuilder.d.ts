@@ -9,8 +9,6 @@ import { ConstructibleBuilder } from "./ConstructibleBuilder";
 import { ProgressionTreeBuilder } from "./ProgressionTreeBuilder";
 import { ModifierBuilder } from "./ModifierBuilder";
 import { UniqueQuarterBuilder } from "./UniqueQuarterBuilder";
-import { CivilizationUnlockBuilder } from "./CivilizationUnlockBuilder";
-import { LeaderUnlockBuilder } from "./LeaderUnlockBuilder";
 type TCivilizationBuilder = TClassProperties<CivilizationBuilder>;
 export declare class CivilizationBuilder extends BaseBuilder<TCivilizationBuilder> {
     _current: DatabaseNode;
@@ -42,7 +40,7 @@ export declare class CivilizationBuilder extends BaseBuilder<TCivilizationBuilde
      * @description Bind entity as unique to this civilization
      * @param items
      */
-    bind(items?: (UnitBuilder | ConstructibleBuilder | ProgressionTreeBuilder | ModifierBuilder | UniqueQuarterBuilder | CivilizationUnlockBuilder | LeaderUnlockBuilder)[]): this;
+    bind(items?: (UnitBuilder | ConstructibleBuilder | ProgressionTreeBuilder | ModifierBuilder | UniqueQuarterBuilder)[]): this;
     build(): XmlFile[];
 }
 export {};

@@ -75,11 +75,11 @@ export class ConstructibleBuilder extends BaseBuilder<TConstructibleBuilder> {
     }
 
     migrate() {
-        if(!this.improvement && !this.building) {
-            if(this.constructible.constructibleType.startsWith('BUILDING_')){
+        if (!this.improvement && !this.building) {
+            if (this.constructible.constructibleType.startsWith('BUILDING_')) {
                 this.building = {};
             }
-            if(this.constructible.constructibleType.startsWith('IMPROVEMENT_')) {
+            if (this.constructible.constructibleType.startsWith('IMPROVEMENT_')) {
                 this.improvement = {};
             }
         }
@@ -181,13 +181,13 @@ export class ConstructibleBuilder extends BaseBuilder<TConstructibleBuilder> {
             })]
         })
 
-        this._localizations.fill({
-            englishText: this.localizations.map(item => {
-                return new ConstructibleLocalization({
+        this.localizations.forEach(item => {
+            this._localizations.push(
+                new ConstructibleLocalization({
                     prefix: this.constructible.constructibleType,
                     ...item
-                });
-            }).flatMap(item => item.getNodes())
+                }).getNodes()
+            );
         });
 
         return this;

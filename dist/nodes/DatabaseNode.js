@@ -86,6 +86,7 @@ class DatabaseNode extends BaseNode_1.BaseNode {
         this.unitStats = [];
         this.unitAdvisories = [];
         this.englishText = [];
+        this.localizedText = [];
         this.iconDefinitions = [];
         this.visualRemaps = [];
         this.uniqueQuarters = [];
@@ -108,6 +109,11 @@ class DatabaseNode extends BaseNode_1.BaseNode {
         this.visArtCivilizationBuildingCultures = [];
         this.visArtCivilizationUnitCultures = [];
         this.fill(payload);
+    }
+    push(payload = {}) {
+        for (const [key, value] of Object.entries(payload)) {
+            this[key] = this[key].concat(value);
+        }
     }
     toXmlElement() {
         //check if all nodes is empty

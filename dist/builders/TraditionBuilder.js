@@ -59,10 +59,8 @@ class TraditionBuilder extends BaseBuilder_1.BaseBuilder {
             types: [new nodes_1.TypeNode({ kind: constants_1.KIND.TRADITION, type: this.tradition.traditionType })],
             traditions: [new nodes_1.TraditionNode(Object.assign({ name: (0, utils_1.locale)(this.tradition.traditionType, 'name'), description: (0, utils_1.locale)(this.tradition.traditionType, 'description') }, this.tradition))]
         });
-        this._localizations.fill({
-            englishText: this.localizations.map(item => {
-                return new localizations_1.TraditionLocalization(Object.assign({ prefix: this.tradition.traditionType }, item));
-            }).flatMap(item => item.getNodes())
+        this.localizations.forEach(item => {
+            this._localizations.push(new localizations_1.TraditionLocalization(Object.assign({ prefix: this.tradition.traditionType }, item)).getNodes());
         });
         return this;
     }

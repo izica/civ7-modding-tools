@@ -11,6 +11,7 @@ export declare const RESOURCE: {
     readonly IVORY: "RESOURCE_IVORY";
     readonly NITER: "RESOURCE_NITER";
     readonly OIL: "RESOURCE_OIL";
+    readonly IRON: "RESOURCE_IRON";
     readonly PEARLS: "RESOURCE_PEARLS";
     readonly QUININE: "RESOURCE_QUININE";
     readonly RUBBER: "RESOURCE_RUBBER";

@@ -24,7 +24,7 @@ import {
 import { ACTION_GROUP_ACTION, KIND, UNIT_CLASS } from "../constants";
 import { locale, trim } from "../utils";
 import { XmlFile } from "../files";
-import { TUnitLocalization, UnitLocalization } from "../localizations";
+import { TUnitLocalization, UniqueQuarterLocalization, UnitLocalization } from "../localizations";
 
 import { BaseBuilder } from "./BaseBuilder";
 
@@ -129,13 +129,13 @@ export class UnitBuilder extends BaseBuilder<TUnitBuilder> {
             })]
         })
 
-        this._localizations.fill({
-            englishText: this.localizations.map(item => {
-                return new UnitLocalization({
+        this.localizations.forEach(item => {
+            this._localizations.push(
+                new UnitLocalization({
                     prefix: this.unit.unitType,
                     ...item
-                });
-            }).flatMap(item => item.getNodes())
+                }).getNodes()
+            );
         });
 
         return this;

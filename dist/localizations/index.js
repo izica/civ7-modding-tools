@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UnitLocalization = exports.UniqueQuarterLocalization = exports.TraditionLocalization = exports.ProgressionTreeNodeLocalization = exports.ProgressionTreeLocalization = exports.ModifierLocalization = exports.LeaderUnlockLocalization = exports.ConstructibleLocalization = exports.CivilizationUnlockLocalization = exports.CivilizationLocalization = void 0;
+exports.UnlockRequirementLocalization = exports.UnitLocalization = exports.UniqueQuarterLocalization = exports.TraditionLocalization = exports.ProgressionTreeNodeLocalization = exports.ProgressionTreeLocalization = exports.ModifierLocalization = exports.LeaderUnlockLocalization = exports.ConstructibleLocalization = exports.CivilizationUnlockLocalization = exports.CivilizationLocalization = void 0;
 var CivilizationLocalization_1 = require("./CivilizationLocalization");
 Object.defineProperty(exports, "CivilizationLocalization", { enumerable: true, get: function () { return CivilizationLocalization_1.CivilizationLocalization; } });
 var CivilizationUnlockLocalization_1 = require("./CivilizationUnlockLocalization");
@@ -21,4 +21,6 @@ var UniqueQuarterLocalization_1 = require("./UniqueQuarterLocalization");
 Object.defineProperty(exports, "UniqueQuarterLocalization", { enumerable: true, get: function () { return UniqueQuarterLocalization_1.UniqueQuarterLocalization; } });
 var UnitLocalization_1 = require("./UnitLocalization");
 Object.defineProperty(exports, "UnitLocalization", { enumerable: true, get: function () { return UnitLocalization_1.UnitLocalization; } });
+var UnlockRequirementLocalization_1 = require("./UnlockRequirementLocalization");
+Object.defineProperty(exports, "UnlockRequirementLocalization", { enumerable: true, get: function () { return UnlockRequirementLocalization_1.UnlockRequirementLocalization; } });
 //# sourceMappingURL=index.js.map

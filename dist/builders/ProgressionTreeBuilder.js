@@ -66,10 +66,8 @@ class ProgressionTreeBuilder extends BaseBuilder_1.BaseBuilder {
                 return new nodes_1.ProgressionTreePrereqNode(item);
             })
         });
-        this._localizations.fill({
-            englishText: this.localizations.map(item => {
-                return new localizations_1.ProgressionTreeLocalization(Object.assign({ prefix: this.progressionTree.progressionTreeType }, item));
-            }).flatMap(item => item.getNodes())
+        this.localizations.forEach(item => {
+            this._localizations.push(new localizations_1.ProgressionTreeLocalization(Object.assign({ prefix: this.progressionTree.progressionTreeType }, item)).getNodes());
         });
         return this;
     }

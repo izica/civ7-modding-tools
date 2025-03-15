@@ -12,6 +12,6 @@ exports.CIVILIZATION_DOMAIN = {
             [AGE_1.AGE.EXPLORATION]: this.ExplorationAgeCivilizations,
             [AGE_1.AGE.MODERN]: this.ModernAgeCivilizations
         }[age];
-    }
+    },
 };
 //# sourceMappingURL=CIVILIZATION_DOMAIN.js.map

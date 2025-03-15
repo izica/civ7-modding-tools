@@ -4,7 +4,7 @@ import { TClassProperties } from "../types";
 import { DatabaseNode, GameEffectNode, ModifierNode, StringNode, TModifierNode } from "../nodes";
 
 import { BaseBuilder } from "./BaseBuilder";
-import { CivilizationLocalization, ModifierLocalization, TModifierLocalization } from "../localizations";
+import { CivilizationLocalization, ConstructibleLocalization, ModifierLocalization, TModifierLocalization } from "../localizations";
 import { locale } from "../utils";
 
 type TModifierBuilder = TClassProperties<ModifierBuilder>
@@ -33,17 +33,17 @@ export class ModifierBuilder extends BaseBuilder<TModifierBuilder> {
                 modifier.strings.push({
                     context: lodash.capitalize(key),
                     value: locale(modifier.id, key)
-                })
+                });
             });
         }
 
-        this._localizations.fill({
-            englishText: this.localizations.map(item => {
-                return new ModifierLocalization({
+        this.localizations.forEach(item => {
+            this._localizations.push(
+                new ModifierLocalization({
                     prefix: modifier.id,
                     ...item
-                });
-            }).flatMap(item => item.getNodes())
+                }).getNodes()
+            );
         });
 
         this._gameEffects.fill({

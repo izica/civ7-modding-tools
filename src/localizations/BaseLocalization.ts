@@ -3,10 +3,10 @@ import * as lodash from "lodash";
 import { TObjectValues } from "../types";
 import { LANGUAGE } from "../constants";
 import { locale } from "../utils";
-import { EnglishTextNode } from "../nodes";
+import { EnglishTextNode, LocalizedTextNode, TDatabaseNode } from "../nodes";
 
 export class BaseLocalization<T> {
-    locale?: TObjectValues<typeof LANGUAGE> | null = LANGUAGE.en_US;
+    language?: TObjectValues<typeof LANGUAGE> = LANGUAGE.en_US;
     prefix?: string | null = null;
 
     constructor(payload: Partial<T> = {}) {
@@ -22,31 +22,52 @@ export class BaseLocalization<T> {
         return this;
     }
 
-    getNodes(): EnglishTextNode[] {
-        const keys = lodash.without(Object.keys(this), 'prefix', 'locale');
+    getNodes(): Partial<TDatabaseNode> {
+        const keys = lodash.without(Object.keys(this), 'prefix', 'language');
 
-        if (this.locale === LANGUAGE.en_US) {
-            return (keys as string[]).flatMap((key) => {
-                if (!this[key]) {
-                    return null;
-                }
+        const result: Pick<TDatabaseNode, 'englishText' | 'localizedText'> = {
+            englishText: [],
+            localizedText: []
+        };
 
-                if (Array.isArray(this[key])) {
-                    return this[key].map((value, index) => {
-                        return new EnglishTextNode({
-                            tag: locale(this.prefix || '', `${key}_${index + 1}`),
-                            text: value
-                        })
-                    });
-                }
+        (keys as string[]).forEach(key => {
+            if (!this[key]) {
+                return;
+            }
 
-                return new EnglishTextNode({
+            if (Array.isArray(this[key])) {
+                this[key].forEach((value, index) => {
+                    const data = {
+                        tag: locale(this.prefix || '', `${key}_${index + 1}`),
+                        text: value
+                    };
+
+                    if (this.language === LANGUAGE.en_US) {
+                        result.englishText.push(new EnglishTextNode(data));
+                    } else {
+                        result.localizedText.push(new LocalizedTextNode({
+                            language: this.language,
+                            ...data
+                        }));
+                    }
+                });
+            } else {
+                const data = {
                     tag: locale(this.prefix || '', key),
                     text: this[key]
-                });
-            }).filter(item => !!item);
-        }
+                };
 
-        return [];
+                if (this.language === LANGUAGE.en_US) {
+                    result.englishText.push(new EnglishTextNode(data));
+                } else {
+                    result.localizedText.push(new LocalizedTextNode({
+                        language: this.language,
+                        ...data
+                    }));
+                }
+            }
+        });
+
+        return result;
     }
 }

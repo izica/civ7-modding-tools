@@ -68,8 +68,9 @@ import { UnitAdvisoryNode } from "./UnitAdvisoryNode";
 import { CityNameNode } from "./CityNameNode";
 import { LeaderUnlockNode } from "./LeaderUnlockNode";
 import { LeaderCivilizationBiasNode } from "./LeaderCivilizationBiasNode";
-export type TDatabase = Pick<DatabaseNode, "civilizationItems" | "civilizationTags" | "civilizationTraits" | "civilizations" | "constructibleMaintenances" | "constructibleValidDistricts" | "constructibleYieldChanges" | "constructibles" | "englishText" | "iconDefinitions" | "legacyCivilizationTraits" | "legacyCivilizations" | "civilizationUnlocks" | "tags" | "traitModifiers" | "traits" | "typeTags" | "kinds" | "types" | "unitCosts" | "buildings" | "unitReplaces" | "unitStats" | "units" | "unitUpgrades" | "unitAdvisories" | "unlocks" | "unlockRequirements" | "unlockConfigurationValues" | "requirementSets" | "requirements" | "requirementArguments" | "requirementSetRequirements" | "unlockRewards" | "adjacencyYieldChanges" | "constructibleAdjacencies" | "warehouseYieldChanges" | "progressionTreeAdvisories" | "progressionTrees" | "progressionTreeNodes" | "progressionTreeNodeUnlocks" | "traditions" | "traditionModifiers" | "progressionTreePrereqs" | "constructibleWarehouseYields" | "districtFreeConstructibles" | "constructibleValidBiomes" | "constructibleValidFeatures" | "constructibleValidTerrains" | "constructibleValidResources" | "constructiblePlunders" | "improvements" | "startBiasBiomes" | "startBiasTerrains" | "startBiasRivers" | "startBiasResources" | "startBiasFeatureClasses" | "startBiasAdjacentToCoasts" | "visArtCivilizationBuildingCultures" | "visArtCivilizationUnitCultures" | "uniqueQuarters" | "uniqueQuarterModifiers" | "gameModifiers" | "cityNames" | "leaderUnlocks" | "leaderCivilizationBias" | "visualRemaps">;
-export declare class DatabaseNode extends BaseNode<TDatabase> {
+import { LocalizedTextNode } from "./LocalizedTextNode";
+export type TDatabaseNode = Pick<DatabaseNode, "civilizationItems" | "civilizationTags" | "civilizationTraits" | "civilizations" | "constructibleMaintenances" | "constructibleValidDistricts" | "constructibleYieldChanges" | "constructibles" | "englishText" | "iconDefinitions" | "legacyCivilizationTraits" | "legacyCivilizations" | "civilizationUnlocks" | "tags" | "traitModifiers" | "traits" | "typeTags" | "kinds" | "types" | "unitCosts" | "buildings" | "unitReplaces" | "unitStats" | "units" | "unitUpgrades" | "unitAdvisories" | "unlocks" | "unlockRequirements" | "unlockConfigurationValues" | "requirementSets" | "requirements" | "requirementArguments" | "requirementSetRequirements" | "unlockRewards" | "adjacencyYieldChanges" | "constructibleAdjacencies" | "warehouseYieldChanges" | "progressionTreeAdvisories" | "progressionTrees" | "progressionTreeNodes" | "progressionTreeNodeUnlocks" | "traditions" | "traditionModifiers" | "progressionTreePrereqs" | "constructibleWarehouseYields" | "districtFreeConstructibles" | "constructibleValidBiomes" | "constructibleValidFeatures" | "constructibleValidTerrains" | "constructibleValidResources" | "constructiblePlunders" | "improvements" | "startBiasBiomes" | "startBiasTerrains" | "startBiasRivers" | "startBiasResources" | "startBiasFeatureClasses" | "startBiasAdjacentToCoasts" | "visArtCivilizationBuildingCultures" | "visArtCivilizationUnitCultures" | "uniqueQuarters" | "uniqueQuarterModifiers" | "gameModifiers" | "cityNames" | "leaderUnlocks" | "leaderCivilizationBias" | "localizedText" | "visualRemaps">;
+export declare class DatabaseNode extends BaseNode<TDatabaseNode> {
     _name: string;
     kinds: KindNode[];
     types: TypeNode[];
@@ -117,6 +118,7 @@ export declare class DatabaseNode extends BaseNode<TDatabase> {
     unitStats: UnitStatNode[];
     unitAdvisories: UnitAdvisoryNode[];
     englishText: EnglishTextNode[];
+    localizedText: LocalizedTextNode[];
     iconDefinitions: IconDefinitionNode[];
     visualRemaps: VisualRemapNode[];
     uniqueQuarters: UniqueQuarterNode[];
@@ -138,7 +140,8 @@ export declare class DatabaseNode extends BaseNode<TDatabase> {
     startBiasAdjacentToCoasts: StartBiasAdjacentToCoastNode[];
     visArtCivilizationBuildingCultures: VisArtCivilizationBuildingCultureNode[];
     visArtCivilizationUnitCultures: VisArtCivilizationUnitCultureNode[];
-    constructor(payload?: Partial<TDatabase>);
+    constructor(payload?: Partial<TDatabaseNode>);
+    push(payload?: Partial<TDatabaseNode>): void;
     toXmlElement(): {
         Database: {};
     } | null;

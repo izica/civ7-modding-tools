@@ -68,10 +68,8 @@ class UniqueQuarterBuilder extends BaseBuilder_1.BaseBuilder {
         this._icons.fill({
             iconDefinitions: [new nodes_1.IconDefinitionNode(Object.assign({ id: this.uniqueQuarter.uniqueQuarterType }, this.icon))]
         });
-        this._localizations.fill({
-            englishText: this.localizations.map(item => {
-                return new localizations_1.UniqueQuarterLocalization(Object.assign({ prefix: this.uniqueQuarter.uniqueQuarterType }, item));
-            }).flatMap(item => item.getNodes())
+        this.localizations.forEach(item => {
+            this._localizations.push(new localizations_1.UniqueQuarterLocalization(Object.assign({ prefix: this.uniqueQuarter.uniqueQuarterType }, item)).getNodes());
         });
         return this;
     }

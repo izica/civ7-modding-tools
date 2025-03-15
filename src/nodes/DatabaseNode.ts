@@ -70,8 +70,9 @@ import { UnitAdvisoryNode } from "./UnitAdvisoryNode";
 import { CityNameNode } from "./CityNameNode";
 import { LeaderUnlockNode } from "./LeaderUnlockNode";
 import { LeaderCivilizationBiasNode } from "./LeaderCivilizationBiasNode";
+import { LocalizedTextNode } from "./LocalizedTextNode";
 
-export type TDatabase = Pick<DatabaseNode,
+export type TDatabaseNode = Pick<DatabaseNode,
     "civilizationItems" |
     "civilizationTags" |
     "civilizationTraits" |
@@ -138,10 +139,11 @@ export type TDatabase = Pick<DatabaseNode,
     "cityNames" |
     "leaderUnlocks" |
     "leaderCivilizationBias" |
+    "localizedText" |
     "visualRemaps"
 >;
 
-export class DatabaseNode extends BaseNode<TDatabase> {
+export class DatabaseNode extends BaseNode<TDatabaseNode> {
     _name = 'Database';
 
     kinds: KindNode[] = [];
@@ -199,6 +201,7 @@ export class DatabaseNode extends BaseNode<TDatabase> {
     unitAdvisories: UnitAdvisoryNode[] = [];
 
     englishText: EnglishTextNode[] = [];
+    localizedText: LocalizedTextNode[] = [];
     iconDefinitions: IconDefinitionNode[] = [];
     visualRemaps: VisualRemapNode[] = [];
 
@@ -226,9 +229,15 @@ export class DatabaseNode extends BaseNode<TDatabase> {
     visArtCivilizationBuildingCultures: VisArtCivilizationBuildingCultureNode[] = [];
     visArtCivilizationUnitCultures: VisArtCivilizationUnitCultureNode[] = [];
 
-    constructor(payload: Partial<TDatabase> = {}) {
+    constructor(payload: Partial<TDatabaseNode> = {}) {
         super();
         this.fill(payload);
+    }
+
+    push(payload: Partial<TDatabaseNode> = {}) {
+        for (const [key, value] of Object.entries(payload)) {
+            this[key] = this[key].concat(value);
+        }
     }
 
     toXmlElement() {

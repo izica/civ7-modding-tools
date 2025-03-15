@@ -60,10 +60,8 @@ class ModifierBuilder extends BaseBuilder_1.BaseBuilder {
                 });
             });
         }
-        this._localizations.fill({
-            englishText: this.localizations.map(item => {
-                return new localizations_1.ModifierLocalization(Object.assign({ prefix: modifier.id }, item));
-            }).flatMap(item => item.getNodes())
+        this.localizations.forEach(item => {
+            this._localizations.push(new localizations_1.ModifierLocalization(Object.assign({ prefix: modifier.id }, item)).getNodes());
         });
         this._gameEffects.fill({
             modifiers: [modifier]

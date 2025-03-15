@@ -11,7 +11,6 @@ class CivilizationLocalization extends BaseLocalization_1.BaseLocalization {
         this.adjective = 'text';
         this.abilityName = 'text';
         this.abilityDescription = 'text';
-        this.unlockPlayAs = 'Play as [B]Something[/B].';
         this.cityNames = ['test city name'];
         this.fill(payload);
     }

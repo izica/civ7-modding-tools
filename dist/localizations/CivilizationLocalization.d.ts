@@ -8,7 +8,6 @@ export declare class CivilizationLocalization extends BaseLocalization<TCiviliza
     adjective: string;
     abilityName: string;
     abilityDescription: string;
-    unlockPlayAs: string;
     cityNames: string[];
     constructor(payload?: Partial<TCivilizationLocalization>);
 }

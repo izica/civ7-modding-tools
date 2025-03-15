@@ -9,6 +9,7 @@ class UnlockRequirementNode extends BaseNode_1.BaseNode {
         this.requirementSetId = null;
         this.description = null;
         this.tooltip = null;
+        this.narrativeText = null;
         this.fill(payload);
     }
 }
