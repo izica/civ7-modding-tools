@@ -48,8 +48,6 @@ import { ConstructibleBuilder } from "./ConstructibleBuilder";
 import { ProgressionTreeBuilder } from "./ProgressionTreeBuilder";
 import { ModifierBuilder } from "./ModifierBuilder";
 import { UniqueQuarterBuilder } from "./UniqueQuarterBuilder";
-import { CivilizationUnlockBuilder } from "./CivilizationUnlockBuilder";
-import { LeaderUnlockBuilder } from "./LeaderUnlockBuilder";
 
 type TCivilizationBuilder = TClassProperties<CivilizationBuilder>
 
@@ -280,7 +278,7 @@ export class CivilizationBuilder extends BaseBuilder<TCivilizationBuilder> {
      * @description Bind entity as unique to this civilization
      * @param items
      */
-    bind(items: (UnitBuilder | ConstructibleBuilder | ProgressionTreeBuilder | ModifierBuilder | UniqueQuarterBuilder | CivilizationUnlockBuilder | LeaderUnlockBuilder)[] = []) {
+    bind(items: (UnitBuilder | ConstructibleBuilder | ProgressionTreeBuilder | ModifierBuilder | UniqueQuarterBuilder)[] = []) {
         items.forEach(item => {
             if (item instanceof UnitBuilder) {
                 item._current.units.forEach(unit => {
@@ -376,40 +374,6 @@ export class CivilizationBuilder extends BaseBuilder<TCivilizationBuilder> {
                         hidden: true
                     }));
                 })
-            }
-
-            if (item instanceof CivilizationUnlockBuilder) {
-                this._shell.civilizationUnlocks.push(new CivilizationUnlockNode({
-                    ageDomain: 'StandardAges',
-                    civilizationDomain: CIVILIZATION_DOMAIN.from(item.from.ageType),
-                    civilizationType: item.from.civilizationType,
-                    type: item.to.civilizationType,
-                    ageType: item.to.ageType,
-                    kind: KIND.CIVILIZATION,
-                    name: locale(item.to.civilizationType, 'NAME'),
-                    description: locale(item.to.civilizationType, 'DESCRIPTION'),
-                    icon: item.to.civilizationType
-                }))
-            }
-
-            if (item instanceof LeaderUnlockBuilder) {
-                this._shell.leaderUnlocks.push(new LeaderUnlockNode({
-                    leaderDomain: 'StandardLeaders',
-                    ageDomain: 'StandardAges',
-                    kind: KIND.CIVILIZATION,
-                    name: locale(item.leaderUnlock.type, 'name'),
-                    description: locale(item.leaderUnlock.type, 'description'),
-                    icon: item.leaderUnlock.type,
-                    ...item.leaderUnlock
-                }))
-
-                this._shell.leaderCivilizationBias.push(new LeaderCivilizationBiasNode({
-                    civilizationDomain: CIVILIZATION_DOMAIN.from(item.leaderUnlock.ageType),
-                    civilizationType: item.leaderUnlock.type,
-                    reasonType: locale(`PLAY_AS_${trim(item.leaderUnlock.leaderType)}_${trim(item.leaderUnlock.type)}`, 'TOOLTIP'),
-                    ...item.leaderUnlock,
-                    ...item.leaderCivilizationBias
-                }))
             }
         });
         return this;

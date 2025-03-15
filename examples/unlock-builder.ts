@@ -32,6 +32,18 @@ const civilizationFromGreece = new UnlockBuilder({
     }
 });
 
+// unlock russia from exploration civ
+const civilizationToRussia = new UnlockBuilder({
+    name: 'to russia',
+    actionGroupBundle: ACTION_GROUP_BUNDLE.AGE_EXPLORATION,
+    civilizationUnlock: {
+        civilizationDomain: CIVILIZATION_DOMAIN.ExplorationAgeCivilizations,
+        civilizationType: civilization.civilization.civilizationType,
+        ageType: AGE.MODERN,
+        type: 'CIVILIZATION_RUSSIA'
+    }
+});
+
 // unlock exploration civ from leader catherine
 const leaderCatherineUnlock = new UnlockBuilder({
     name: 'catherine',
@@ -42,3 +54,4 @@ const leaderCatherineUnlock = new UnlockBuilder({
         type: civilization.civilization.civilizationType
     }
 });
+
