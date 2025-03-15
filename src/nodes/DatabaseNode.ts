@@ -71,6 +71,9 @@ import { CityNameNode } from "./CityNameNode";
 import { LeaderUnlockNode } from "./LeaderUnlockNode";
 import { LeaderCivilizationBiasNode } from "./LeaderCivilizationBiasNode";
 import { LocalizedTextNode } from "./LocalizedTextNode";
+import { GreatPersonClassNode } from "./GreatPersonClassNode";
+import { GreatPersonIndividualNode } from "./GreatPersonIndividualNode";
+import { GreatPersonIndividualActionModifierNode } from "./GreatPersonIndividualActionModifierNode";
 
 export type TDatabaseNode = Pick<DatabaseNode,
     "civilizationItems" |
@@ -140,6 +143,9 @@ export type TDatabaseNode = Pick<DatabaseNode,
     "leaderUnlocks" |
     "leaderCivilizationBias" |
     "localizedText" |
+    "greatPersonClasses" |
+    "greatPersonIndividuals" |
+    "greatPersonIndividualActionModifiers" |
     "visualRemaps"
 >;
 
@@ -183,6 +189,10 @@ export class DatabaseNode extends BaseNode<TDatabaseNode> {
     cityNames: CityNameNode[] = [];
 
     districtFreeConstructibles: DistrictFreeConstructibleNode[] = [];
+
+    greatPersonClasses:  GreatPersonClassNode[] = [];
+    greatPersonIndividuals:  GreatPersonIndividualNode[] = [];
+    greatPersonIndividualActionModifiers:  GreatPersonIndividualActionModifierNode[] = [];
 
     progressionTreeAdvisories: ProgressionTreeAdvisoryNode[] = [];
     progressionTrees: ProgressionTreeNode[] = [];

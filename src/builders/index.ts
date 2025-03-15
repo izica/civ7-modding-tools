@@ -1,6 +1,7 @@
 export { BaseBuilder } from './BaseBuilder'
 export { CivilizationBuilder } from './CivilizationBuilder'
 export { ConstructibleBuilder } from './ConstructibleBuilder'
+export { GreatPersonBuilder } from './GreatPersonBuilder'
 export { ImportFileBuilder } from './ImportFileBuilder'
 export { ModifierBuilder } from './ModifierBuilder'
 export { ProgressionTreeBuilder } from './ProgressionTreeBuilder'

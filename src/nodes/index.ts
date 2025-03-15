@@ -71,6 +71,9 @@ export { VisArtCivilizationBuildingCultureNode, TVisArtCivilizationBuildingCultu
 export { VisArtCivilizationUnitCultureNode, TVisArtCivilizationUnitCultureNode } from './VisArtCivilizationUnitCultureNode';
 export { VisualRemapNode, TVisualRemapNode } from './VisualRemapNode';
 export { WarehouseYieldChangeNode, TWarehouseYieldChangeNode } from './WarehouseYieldChangeNode';
+export { GreatPersonClassNode, TGreatPersonClassNode } from './GreatPersonClassNode';
+export { GreatPersonIndividualNode, TGreatPersonIndividualNode } from './GreatPersonIndividualNode';
+export { GreatPersonIndividualActionModifierNode, TGreatPersonIndividualActionModifierNode } from './GreatPersonIndividualActionModifierNode';
 
 export { ShellCivilizationNodeSlice, TShellCivilizationNodeSlice } from './slices/ShellCivilizationNodeSlice';
 export { GameCivilizationNodeSlice, TGameCivilizationNodeSlice } from './slices/GameCivilizationNodeSlice';
