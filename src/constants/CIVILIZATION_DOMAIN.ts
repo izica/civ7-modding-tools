@@ -12,5 +12,5 @@ export const CIVILIZATION_DOMAIN = {
             [AGE.EXPLORATION]: this.ExplorationAgeCivilizations,
             [AGE.MODERN]: this.ModernAgeCivilizations
         }[age];
-    }
+    },
 } as const;

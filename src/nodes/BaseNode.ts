@@ -35,11 +35,21 @@ export class BaseNode<T extends Object = object> {
     }
 
     insertOrIgnore() {
-        if (!['Row', 'InsertOrIgnore'].includes(this._name)) {
-            throw new Error('Only Row|InsertOrIgnore nodes can be transformed to InsertOrIgnore.');
+        if (!['Row', 'InsertOrIgnore', 'Replace'].includes(this._name)) {
+            throw new Error('Only Row|InsertOrIgnore|Replace nodes can be transformed to InsertOrIgnore.');
         }
 
         this._name = 'InsertOrIgnore';
+
+        return this;
+    }
+
+    replace() {
+        if (!['Row', 'InsertOrIgnore', 'Replace'].includes(this._name)) {
+            throw new Error('Only Row|InsertOrIgnore|Replace nodes can be transformed to Replace.');
+        }
+
+        this._name = 'Replace';
 
         return this;
     }
