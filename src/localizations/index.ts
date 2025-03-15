@@ -8,4 +8,4 @@ export { ProgressionTreeNodeLocalization, TProgressionTreeNodeLocalization } fro
 export { TraditionLocalization, TTraditionLocalization } from './TraditionLocalization'
 export { UniqueQuarterLocalization, TUniqueQuarterLocalization } from './UniqueQuarterLocalization'
 export { UnitLocalization, TUnitLocalization } from './UnitLocalization'
-export { RequirementLocalization, TRequirementLocalization } from './RequirementLocalization'
+export { UnlockRequirementLocalization, TUnlockRequirementLocalization } from './UnlockRequirementLocalization'

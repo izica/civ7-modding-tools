@@ -5,7 +5,8 @@ import { TClassProperties, TPartialRequired } from "../types";
 import {
     CivilizationUnlockNode,
     DatabaseNode,
-    KindNode, LeaderUnlockNode,
+    KindNode,
+    LeaderUnlockNode,
     RequirementArgumentNode,
     RequirementNode,
     RequirementSetNode,
@@ -23,7 +24,7 @@ import {
     UnlockRequirementNode,
     UnlockRewardNode
 } from "../nodes";
-import { TLeaderUnlockLocalization } from "../localizations";
+import { TUnlockRequirementLocalization, UnlockRequirementLocalization } from "../localizations";
 import { ACTION_GROUP_ACTION, KIND, REQUIREMENT, REQUIREMENT_SET } from "../constants";
 
 import { BaseBuilder } from "./BaseBuilder";
@@ -44,13 +45,16 @@ export class UnlockBuilder extends BaseBuilder<TUnlockRewardBuilder> {
     requirementSet: TPartialRequired<TRequirementSetNode, 'requirementSetType'> & {
         requirements?: (TPartialRequired<TRequirementNode, 'requirementType'> & {
             requirementArguments?: TPartialRequired<TRequirementArgumentNode, 'name'>[]
-        })[]
+        })[],
+        localizations?: Partial<TUnlockRequirementLocalization>[]
     } | null = null;
 
-    civilizationUnlock: TPartialRequired<TCivilizationUnlockNode, 'ageType' | 'civilizationDomain' | 'civilizationType' | 'type'> | null = null;
-    leaderUnlock: TPartialRequired<TLeaderUnlockNode, 'ageType' | 'leaderType' | 'type'> | null = null;
-
-    localizations: Partial<TLeaderUnlockLocalization>[] = [];
+    civilizationUnlock: (TPartialRequired<TCivilizationUnlockNode, 'ageType' | 'civilizationDomain' | 'civilizationType' | 'type'> & {
+        localizations?: Partial<TUnlockRequirementLocalization>[]
+    }) | null = null;
+    leaderUnlock: (TPartialRequired<TLeaderUnlockNode, 'ageType' | 'leaderType' | 'type'> & {
+        localizations?: Partial<TUnlockRequirementLocalization>[]
+    }) | null = null;
 
     constructor(payload: Partial<TUnlockRewardBuilder> = {}) {
         super();
@@ -89,6 +93,25 @@ export class UnlockBuilder extends BaseBuilder<TUnlockRewardBuilder> {
                 const requirementSet = new RequirementSetNode(this.requirementSet).insertOrIgnore()
                 this._always.requirementSets.push(requirementSet);
 
+                this._always.unlockRequirements.push(
+                    new UnlockRequirementNode({
+                        ...requirementSet,
+                        ...this.unlockConfigurationValue,
+                        description: locale(requirementSet.requirementSetId, 'description'),
+                        tooltip: locale(requirementSet.requirementSetId, 'tooltip'),
+                        narrativeText: locale(requirementSet.requirementSetId, 'narrative'),
+                    }).insertOrIgnore()
+                );
+
+                this.requirementSet.localizations?.forEach(localization => {
+                    this._localizations.englishText.concat(
+                        new UnlockRequirementLocalization({
+                            prefix: requirementSet.requirementSetId,
+                            ...localization
+                        }).getNodes()
+                    )
+                });
+
                 this.requirementSet.requirements?.forEach(req => {
                     const requirement = new RequirementNode(req).insertOrIgnore();
                     this._always.requirements.push(requirement);
@@ -99,16 +122,6 @@ export class UnlockBuilder extends BaseBuilder<TUnlockRewardBuilder> {
                             ...requirement
                         }).insertOrIgnore()
                     );
-
-                    this._always.unlockRequirements.push(
-                        new UnlockRequirementNode({
-                            ...requirementSet,
-                            ...this.unlockConfigurationValue,
-                            description: locale(this.unlockConfigurationValue?.unlockType, 'description'),
-                            tooltip: locale(this.unlockConfigurationValue?.unlockType, 'tooltip'),
-                            narrativeText: locale(this.unlockConfigurationValue?.unlockType, 'narrative'),
-                        }).insertOrIgnore()
-                    )
 
                     req.requirementArguments?.forEach(arg => {
                         this._always.requirementArguments.push(
@@ -164,6 +177,15 @@ export class UnlockBuilder extends BaseBuilder<TUnlockRewardBuilder> {
                     narrativeText: locale(`UNLOCK_PLAY_AS_${trim(civilizationUnlock.civilizationType)}_${trim(civilizationUnlock.type)}`, 'narrative'),
                 }).insertOrIgnore()
             );
+
+            this.civilizationUnlock.localizations?.forEach(localization => {
+                this._localizations.englishText.concat(
+                    new UnlockRequirementLocalization({
+                        prefix: `UNLOCK_PLAY_AS_${trim(civilizationUnlock.civilizationType)}_${trim(civilizationUnlock.type)}`,
+                        ...localization
+                    }).getNodes()
+                )
+            });
 
             this._always.requirementArguments.push(
                 new RequirementArgumentNode({
@@ -224,6 +246,15 @@ export class UnlockBuilder extends BaseBuilder<TUnlockRewardBuilder> {
                 }).insertOrIgnore()
             );
 
+            this.leaderUnlock.localizations?.forEach(localization => {
+                this._localizations.englishText.concat(
+                    new UnlockRequirementLocalization({
+                        prefix: `UNLOCK_PLAY_AS_${trim(leaderUnlock.leaderType)}_${trim(leaderUnlock.type)}`,
+                        ...localization
+                    }).getNodes()
+                )
+            });
+
             this._always.requirementArguments.push(
                 new RequirementArgumentNode({
                     ...requirement,
@@ -240,14 +271,6 @@ export class UnlockBuilder extends BaseBuilder<TUnlockRewardBuilder> {
             );
         }
 
-        // this._localizations.fill({
-        //     englishText: this.localizations.map(item => {
-        //         return new LeaderUnlockLocalization({
-        //             prefix: `PLAY_AS_${trim(this.leaderUnlock.leaderType)}_${trim(this.leaderUnlock.type)}`,
-        //             ...item
-        //         });
-        //     }).flatMap(item => item.getNodes())
-        // });
         return this;
     }
 
