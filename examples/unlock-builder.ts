@@ -3,6 +3,8 @@ import { ACTION_GROUP_BUNDLE, AGE, CIVILIZATION_DOMAIN } from "../src";
 
 // unlock by 3 improved iron
 const civilizationUnlock = new UnlockBuilder({
+    name: 'ingame unlock',
+    actionGroupBundle: ACTION_GROUP_BUNDLE.AGE_EXPLORATION,
     unlockConfigurationValue: {
         configurationValue: civilization.civilization.civilizationType
     },
