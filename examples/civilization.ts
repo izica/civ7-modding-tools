@@ -1,16 +1,22 @@
 import {
     ACTION_GROUP_BUNDLE,
+    AGE,
     CivilizationBuilder,
+    CivilizationUnlockBuilder,
+    COLLECTION,
     CONSTRUCTIBLE_TYPE_TAG,
-    ConstructibleBuilder, ConstructibleLocalization,
+    ConstructibleBuilder,
     DISTRICT,
+    EFFECT,
     ImportFileBuilder,
+    LeaderUnlockBuilder,
     Mod,
-    TAG_TRAIT, TRAIT,
-    UNIT,
+    REQUIREMENT,
+    TAG_TRAIT,
+    TRAIT,
     UNIT_CLASS,
+    UNIT,
     UnitBuilder, YIELD,
-    AGE, CivilizationUnlockBuilder, COLLECTION, EFFECT, LeaderUnlockBuilder, REQUIREMENT
 } from "./src";
 
 let mod = new Mod({

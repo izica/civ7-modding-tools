@@ -1,4 +1,9 @@
-import { ACTION_GROUP_BUNDLE, CivilizationBuilder, ImportFileBuilder, Mod, TAG_TRAIT } from "./src";
+import {
+    ACTION_GROUP,
+    ACTION_GROUP_ACTION,
+    ImportFileBuilder,
+    Mod
+} from "./src";
 
 let mod = new Mod({
     id: 'mod-test',

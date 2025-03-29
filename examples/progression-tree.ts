@@ -12,10 +12,10 @@ import {
     ProgressionTreeNodeBuilder,
     REQUIREMENT,
     TAG_TRAIT,
+    TraditionBuilder,
     TRAIT,
     UNIT_CLASS
 } from "./src";
-import { TraditionBuilder } from "../src";
 
 let mod = new Mod({
     id: 'mod-test',
