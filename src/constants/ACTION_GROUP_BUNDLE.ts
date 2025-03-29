@@ -8,18 +8,18 @@ export const ACTION_GROUP_BUNDLE = {
         shell: ACTION_GROUP.SHELL,
         always: ACTION_GROUP.GAME,
         current: ACTION_GROUP.AGE_ANTIQUITY_CURRENT,
-        exist: ACTION_GROUP.AGE_ANTIQUITY_EXIST
+        persist: ACTION_GROUP.AGE_ANTIQUITY_PERSIST
     }),
     [AGE.EXPLORATION]: new ActionGroupBundle({
         shell: ACTION_GROUP.SHELL,
         always: ACTION_GROUP.GAME,
         current: ACTION_GROUP.AGE_EXPLORATION_CURRENT,
-        exist: ACTION_GROUP.AGE_EXPLORATION_EXIST
+        persist: ACTION_GROUP.AGE_EXPLORATION_PERSIST
     }),
     [AGE.MODERN]: new ActionGroupBundle({
         shell: ACTION_GROUP.SHELL,
         always: ACTION_GROUP.GAME,
         current: ACTION_GROUP.AGE_MODERN_CURRENT,
-        exist: ACTION_GROUP.AGE_MODERN_EXIST
+        persist: ACTION_GROUP.AGE_MODERN_PERSIST
     }),
 } as const;

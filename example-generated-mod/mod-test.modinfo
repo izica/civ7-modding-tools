@@ -11,7 +11,7 @@
         <Mod id="base-standard" title="LOC_MODULE_BASE_STANDARD_NAME"/>
     </Dependencies>
     <ActionCriteria>
-        <Criteria id="age-antiquity-current">
+        <Criteria id="antiquity-age-current">
             <AgeInUse>AGE_ANTIQUITY</AgeInUse>
         </Criteria>
         <Criteria id="always">
@@ -19,7 +19,7 @@
         </Criteria>
     </ActionCriteria>
     <ActionGroups>
-        <ActionGroup id="65ff3d65-ab5b-48cd-a138-cd82c4ef82ca" scope="game" criteria="age-antiquity-current">
+        <ActionGroup id="age-antiquity-current" scope="game" criteria="antiquity-age-current">
             <Actions>
                 <UpdateDatabase>
                     <Item>civilizations/gondor/current.xml</Item>

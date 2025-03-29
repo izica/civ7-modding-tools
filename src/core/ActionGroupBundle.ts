@@ -8,7 +8,7 @@ export class ActionGroupBundle {
     shell: ActionGroupNode = new ActionGroupNode();
     always: ActionGroupNode = new ActionGroupNode();
     current: ActionGroupNode = new ActionGroupNode();
-    exist: ActionGroupNode = new ActionGroupNode();
+    persist: ActionGroupNode = new ActionGroupNode();
 
     constructor(payload: Partial<TActionGroupBundleActionGroupBundle> = {}) {
         this.fill(payload);
