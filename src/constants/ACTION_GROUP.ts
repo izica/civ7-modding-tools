@@ -4,9 +4,9 @@ import { CriteriaNode } from "../nodes/CriteriaNode";
 
 import { AGE } from "./AGE";
 
-// NB: IDs on ActionGroups and CriteriaNodes on these consts are set to follow  Firaxis'
+// NB: IDs on ActionGroups and CriteriaNodes for the ages are set to follow  Firaxis'
 // conventions present the main game files in e.g. Base\modules\age-antiquity\age-antiquity.modinfo.
-export const ACTION_GROUP = {
+const actionGroupInternal = {
     SHELL: new ActionGroupNode({
         scope: 'shell',
         criteria: new CriteriaNode({ id: 'always' })
@@ -63,4 +63,25 @@ export const ACTION_GROUP = {
             ages: [AGE.MODERN]
         })
     }),
+};
+
+const actionGroupDeprecatedProps = {
+    /**
+     * @deprecated Use AGE_ANTIQUITY_PERSIST directly instead. This may be removed in a future release
+     */
+    AGE_ANTIQUITY_EXIST: actionGroupInternal.AGE_ANTIQUITY_PERSIST,
+    /**
+     * @deprecated Use AGE_EXPLORATION_PERSIST directly instead. This may be removed in a future release
+     */
+    AGE_EXPLORATION_EXIST: actionGroupInternal.AGE_EXPLORATION_PERSIST,
+    /**
+     * @deprecated Use AGE_MODERN_PERSIST directly instead. This may be removed in a future release
+     */
+    AGE_MODERN_EXIST: actionGroupInternal.AGE_MODERN_PERSIST,
+};
+
+export const ACTION_GROUP = {
+    ...actionGroupInternal,
+    ...actionGroupDeprecatedProps
 } as const;
+
