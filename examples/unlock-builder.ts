@@ -1,4 +1,9 @@
-import { REQUIREMENT, REQUIREMENT_SET, RESOURCE, UnlockBuilder } from "./src";
+import {
+    REQUIREMENT_SET,
+    REQUIREMENT,
+    RESOURCE,
+    UnlockBuilder
+} from "./src";
 
 const civilizationUnlock = new UnlockBuilder({
     unlockConfigurationValue: {

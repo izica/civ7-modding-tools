@@ -1,17 +1,20 @@
 import {
     ACTION_GROUP_BUNDLE,
     CivilizationBuilder,
+    COLLECTION,
     CONSTRUCTIBLE_TYPE_TAG,
-    ConstructibleBuilder, ConstructibleLocalization,
+    ConstructibleBuilder,
     DISTRICT,
+    EFFECT,
     ImportFileBuilder,
     Mod,
+    ModifierBuilder,
+    REQUIREMENT,
     TAG_TRAIT, TRAIT,
-    UNIT,
+    UniqueQuarterBuilder,
     UNIT_CLASS,
-    UnitBuilder, YIELD
+    YIELD,
 } from "./src";
-import { COLLECTION, EFFECT, ModifierBuilder, REQUIREMENT, UniqueQuarterBuilder } from "../src";
 
 let mod = new Mod({
     id: 'mod-test',

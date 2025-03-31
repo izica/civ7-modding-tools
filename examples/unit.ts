@@ -1,4 +1,10 @@
-import { ACTION_GROUP_BUNDLE, Mod, UNIT, UNIT_CLASS, UnitBuilder } from "./src";
+import {
+    ACTION_GROUP_BUNDLE,
+    Mod,
+    UNIT_CLASS,
+    UNIT,
+    UnitBuilder
+} from "./src";
 
 let mod = new Mod({
     id: 'mod-test',
